@@ -15,7 +15,7 @@ class OrdersHistoryPage(BasePage):
     def check_order_id_in_orders_history(self, order_id):
         locator = f"//p[contains(text(), '{order_id}')]"
         try:
-            self.driver.find_element(By.XPATH, locator)
+            self.find_element(By.XPATH, locator)
         except NoSuchElementException:
             return False
         return True

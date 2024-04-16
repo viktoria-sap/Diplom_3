@@ -1,4 +1,5 @@
 from selenium.webdriver import ActionChains
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from data.urls import URLS
@@ -28,10 +29,16 @@ class BasePage:
         return WebDriverWait(self.driver, time).until(EC.presence_of_element_located(locator),
                                                       message=f'Element not found in {locator}')
 
+    @allure.step('Ищем элемент')
+    def find_element(self, locator):
+        self.driver.find_element(By.XPATH, locator)
+
+    @allure.step('Ищем элемент и извлекаем текст')
+    def find_element_text(self, locator):
+        return self.driver.find_element(By.XPATH, locator).text
+
     @allure.step('Вводим текст в элемент')
-    def send_keys_to_element_located(self, locator, time=10, keys=None):
-        WebDriverWait(self.driver, time).until(EC.presence_of_element_located(locator),
-                                               message=f'Element not found in {locator}')
+    def send_keys_to_element_located(self, locator, keys=None):
         self.find_element_located(locator).send_keys(keys)
 
     @allure.step('Кликаем по элементу')

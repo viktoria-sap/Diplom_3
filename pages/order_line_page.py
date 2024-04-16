@@ -14,7 +14,7 @@ class OrderLinePage(BasePage):
 
     @allure.step('Получаем ID первого заказа')
     def get_first_order_id(self):
-        return self.driver.find_element(By.XPATH, OrderLinePageLocators.FIRST_ORDER[1]).text
+        return self.find_element_text(OrderLinePageLocators.FIRST_ORDER[1])
 
     @allure.step('Кликаем заказ Ленты Заказов по номеру {order_id}')
     def click_order_by_id(self, order_id):
@@ -25,20 +25,20 @@ class OrderLinePage(BasePage):
     @allure.step('Проверяем видимость модального окна')
     def check_order_details_modal_opened(self):
         try:
-            self.driver.find_element(By.XPATH, OrderLinePageLocators.ORDER_DETAILS_MODAL)
+            self.find_element(OrderLinePageLocators.ORDER_DETAILS_MODAL)
         except NoSuchElementException:
             return False
         return True
 
     @allure.step('Получаем ID заказа из заголовка модального окна')
     def get_order_id_from_modal(self):
-        return self.driver.find_element(By.XPATH, OrderLinePageLocators.ORDER_DETAILS_MODAL_ORDER_ID_XPATH).text
+        return self.find_element_text(OrderLinePageLocators.ORDER_DETAILS_MODAL_ORDER_ID_XPATH)
 
     @allure.step('Проверяем наличие ID {order_id} заказа в Ленте заказов')
     def check_order_id_in_orders_line(self, order_id):
         locator = f"//p[contains(text(), '{order_id}')]"
         try:
-            self.driver.find_element(By.XPATH, locator)
+            self.find_element(locator)
         except NoSuchElementException:
             return False
         return True
@@ -49,17 +49,17 @@ class OrderLinePage(BasePage):
 
     @allure.step('Получаем значение счетчика Выполнено за все время')
     def get_total_count(self):
-        return self.driver.find_element(By.XPATH, OrderLinePageLocators.TOTAL_COUNT_XPATH).text
+        return self.find_element_text(OrderLinePageLocators.TOTAL_COUNT_XPATH)
 
     @allure.step('Получаем значение счетчика Выполнено за сегодня')
     def get_today_count(self):
-        return self.driver.find_element(By.XPATH, OrderLinePageLocators.TODAY_COUNT_XPATH).text
+        return self.find_element_text(OrderLinePageLocators.TODAY_COUNT_XPATH)
 
     @allure.step('Проверяем наличие ID {order_id} заказа среди заказов в работе')
     def check_order_id_in_processing_orders(self, order_id):
         locator = f"//li[text()='{order_id}']"
         try:
-            self.driver.find_element(By.XPATH, locator)
+            self.find_element(locator)
         except NoSuchElementException:
             return False
         return True

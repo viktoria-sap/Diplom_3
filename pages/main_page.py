@@ -1,5 +1,4 @@
 from selenium.common import NoSuchElementException
-from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
 from data.locators import MainPageLocators
@@ -35,7 +34,7 @@ class MainPage(BasePage):
     @allure.step('Проверяем видимость модального окна')
     def check_modal_opened(self):
         try:
-            self.driver.find_element(By.XPATH, MainPageLocators.INGREDIENT_MODAL_XPATH)
+            self.find_element(MainPageLocators.INGREDIENT_MODAL_XPATH)
         except NoSuchElementException:
             return False
         return True
@@ -50,7 +49,7 @@ class MainPage(BasePage):
 
     @allure.step('Получаем значение счетчика ингредиента')
     def get_first_ingredient_counter_value(self):
-        return self.driver.find_element(By.XPATH, MainPageLocators.FIRST_INGREDIENT_COUNTER_XPATH).text
+        return self.find_element_text(MainPageLocators.FIRST_INGREDIENT_COUNTER_XPATH)
 
     @allure.step('Перетаскиваем первый ингредиент в корзину')
     def drag_n_drop_first_ingredient_to_basket(self):
@@ -63,7 +62,7 @@ class MainPage(BasePage):
     @allure.step('Получаем значение ID заказа при его оформлении')
     def get_order_id_when_created(self):
         self.wait_until_element_not_present(MainPageLocators.TEMPORARY_ORDER_MODAL_HEADER)
-        return self.driver.find_element(By.XPATH, MainPageLocators.ORDER_ID_XPATH).text
+        return self.find_element_text(MainPageLocators.ORDER_ID_XPATH)
 
     @allure.step('Создаем заказ')
     def make_order(self):
