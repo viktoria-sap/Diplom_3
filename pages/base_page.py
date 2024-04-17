@@ -29,6 +29,10 @@ class BasePage:
         return WebDriverWait(self.driver, time).until(EC.presence_of_element_located(locator),
                                                       message=f'Element not found in {locator}')
 
+    @allure.step('Кликаем по элементу')
+    def click_element_located(self, locator):
+        return self.find_element_located(locator).click()
+
     @allure.step('Ищем элемент')
     def find_element(self, locator):
         self.driver.find_element(By.XPATH, locator)
@@ -40,11 +44,6 @@ class BasePage:
     @allure.step('Вводим текст в элемент')
     def send_keys_to_element_located(self, locator, keys=None):
         self.find_element_located(locator).send_keys(keys)
-
-    @allure.step('Кликаем по элементу')
-    def click_element_located(self, locator, time=10):
-        return WebDriverWait(self.driver, time).until(EC.presence_of_element_located(locator),
-                                                      message=f'Element not found in {locator}').click()
 
     @allure.step('Получаем текст, находящийся по локатору')
     def get_text_by_locator(self, locator):
