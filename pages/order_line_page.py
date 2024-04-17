@@ -18,7 +18,7 @@ class OrderLinePage(BasePage):
 
     @allure.step('Кликаем заказ Ленты Заказов по номеру {order_id}')
     def click_order_by_id(self, order_id):
-        locator = f"//p[text()='{order_id}']"
+        locator = OrderLinePageLocators.BUTTON_BY_ORDER_ID.format(order_id)
         selector = (By.XPATH, locator)
         self.click_element_located(selector)
 
@@ -36,7 +36,7 @@ class OrderLinePage(BasePage):
 
     @allure.step('Проверяем наличие ID {order_id} заказа в Ленте заказов')
     def check_order_id_in_orders_line(self, order_id):
-        locator = f"//p[contains(text(), '{order_id}')]"
+        locator = OrderLinePageLocators.ORDER_ID_P.format(order_id)
         try:
             self.find_element(locator)
         except NoSuchElementException:
@@ -57,7 +57,7 @@ class OrderLinePage(BasePage):
 
     @allure.step('Проверяем наличие ID {order_id} заказа среди заказов в работе')
     def check_order_id_in_processing_orders(self, order_id):
-        locator = f"//li[text()='{order_id}']"
+        locator = OrderLinePageLocators.ORDER_ID_LI.format(order_id)
         try:
             self.find_element(locator)
         except NoSuchElementException:

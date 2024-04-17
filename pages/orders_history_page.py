@@ -1,9 +1,8 @@
 import allure
 from selenium.common import NoSuchElementException
-from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
-from data.locators import OrderLinePageLocators, MainPageLocators
+from data.locators import OrderLinePageLocators, MainPageLocators, OrdersHistoryPageLocators
 
 
 class OrdersHistoryPage(BasePage):
@@ -13,9 +12,9 @@ class OrdersHistoryPage(BasePage):
 
     @allure.step('Проверяем наличие ID заказа в Истории заказов')
     def check_order_id_in_orders_history(self, order_id):
-        locator = f"//p[contains(text(), '{order_id}')]"
+        locator = OrdersHistoryPageLocators.ORDER_ID_HISTORY_PAGE.format(order_id)
         try:
-            self.find_element(By.XPATH, locator)
+            self.find_element(locator)
         except NoSuchElementException:
             return False
         return True

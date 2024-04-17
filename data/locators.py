@@ -57,10 +57,15 @@ class OrderLinePageLocators:
     ORDER_DETAILS_MODAL_ORDER_ID_XPATH = ".//div[contains(@class, 'Modal_orderBox')]/p"
     TOTAL_COUNT_XPATH = "//p[text()='Выполнено за все время:']/following-sibling::p"
     TODAY_COUNT_XPATH = "//p[text()='Выполнено за сегодня:']/following-sibling::p"
+    BUTTON_BY_ORDER_ID = "//p[text()='{}']"
+    ORDER_ID_P = "//p[contains(text(), '{}')]"
+    ORDER_ID_LI = "//li[text()='{}']"
+
 
 class OrdersHistoryPageLocators:
     FIRST_ORDERS_HISTORY_ORDER = (By.XPATH, ".//li[contains(@class, 'OrderHistory_listItem')]/a/div/p[contains(@class, "
                                 "'text_type_digits')]")
+    ORDER_ID_HISTORY_PAGE = "//p[contains(text(), '{}')]"
 
 
 
